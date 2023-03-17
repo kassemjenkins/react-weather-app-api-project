@@ -9,7 +9,6 @@ const App = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
   const [unit, setUnit] = useState('celcius');
-  let count = 0;
 
   const getLocation = () => {
     if(!navigator.geolocation) {
@@ -27,8 +26,8 @@ const App = () => {
 
   const fetchData = () => {
     // Trying to add some gating logic to stop undefined location getting passed to the api.
-    if (!location && count < 2) {
-      count++;
+    if (!location) {
+      console.log("Null Location value");
     } else {
       const latitude = location?.latitude.toFixed(2);
       const longitude = location?.longitude.toFixed(2);
@@ -44,7 +43,7 @@ const App = () => {
   useEffect(() => {
     getLocation(); 
     fetchData();
-  }, [location]);
+  }, [location?.latitude, location?.longitude]);
 
   const handleClick = (e) => {
     setUnit(e.target.id);
