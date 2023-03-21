@@ -43,7 +43,7 @@ const App = () => {
   useEffect(() => {
     getLocation(); 
     fetchData();
-  }, [location?.latitude, location?.longitude]);
+  }, [location?.latitude.toFixed(2), location?.longitude.toFixed(2)]);
 
   const handleClick = (e) => {
     setUnit(e.target.id);
